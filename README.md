@@ -1,2 +1,2 @@
-#jekpro-activemq-library
+# jekpro-activemq-library
 Jekejeke Prolog Library for ActiveMQ
