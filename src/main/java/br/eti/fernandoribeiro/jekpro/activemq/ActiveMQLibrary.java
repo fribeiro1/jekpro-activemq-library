@@ -31,26 +31,26 @@ import jekpro.tools.api.TermRef;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public final class ActiveMQLibrary {
+public class ActiveMQLibrary {
 
-	public static void closeConnection(final Object connection)
+	public static void closeConnection(Object connection)
 			throws InterpreterMessage {
 
 		try {
 			((Connection) connection).close();
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't close connection"));
 		}
 
 	}
 
-	public static Object createConnection(final Object connectionFactory)
+	public static Object createConnection(Object connectionFactory)
 			throws InterpreterMessage {
 
 		try {
 			return ((ConnectionFactory) connectionFactory).createConnection();
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create connection"));
 		}
@@ -61,26 +61,26 @@ public final class ActiveMQLibrary {
 		return new ActiveMQConnectionFactory();
 	}
 
-	public static Object createConsumer(final Object session,
-			final Object destination) throws InterpreterMessage {
+	public static Object createConsumer(Object session,
+			Object destination) throws InterpreterMessage {
 
 		try {
 			return ((Session) session)
 					.createConsumer((Destination) destination);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create consumer"));
 		}
 
 	}
 
-	public static Object createDurableSubscriber(final Object session,
-			final Object topic, final String name) throws InterpreterMessage {
+	public static Object createDurableSubscriber(Object session,
+			Object topic, String name) throws InterpreterMessage {
 
 		try {
 			return ((Session) session).createDurableSubscriber((Topic) topic,
 					name);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage
 							.systemError("Can't create durable subscriber"));
@@ -88,72 +88,72 @@ public final class ActiveMQLibrary {
 
 	}
 
-	public static Object createProducer(final Object session,
-			final Object destination) throws InterpreterMessage {
+	public static Object createProducer(Object session,
+			Object destination) throws InterpreterMessage {
 
 		try {
 			return ((Session) session)
 					.createProducer((Destination) destination);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create producer"));
 		}
 
 	}
 
-	public static Object createQueue(final Object session,
-			final String queueName) throws InterpreterMessage {
+	public static Object createQueue(Object session,
+			String queueName) throws InterpreterMessage {
 
 		try {
 			return ((Session) session).createQueue(queueName);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create queue"));
 		}
 
 	}
 
-	public static Object createSession(final Object connection,
-			final String transacted, final Integer acknowledgeMode)
+	public static Object createSession(Object connection,
+			String transacted, Integer acknowledgeMode)
 			throws InterpreterMessage {
 
 		try {
 			return ((Connection) connection).createSession(
 					Boolean.valueOf(transacted), acknowledgeMode);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create session"));
 		}
 
 	}
 
-	public static Object createTextMessage(final Object session,
-			final String text) throws InterpreterMessage {
+	public static Object createTextMessage(Object session,
+			String text) throws InterpreterMessage {
 
 		try {
 			return ((Session) session).createTextMessage(text);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create text message"));
 		}
 
 	}
 
-	public static Object createTopic(final Object session,
-			final String topicName) throws InterpreterMessage {
+	public static Object createTopic(Object session,
+			String topicName) throws InterpreterMessage {
 
 		try {
 			return ((Session) session).createTopic(topicName);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't create topic"));
 		}
 
 	}
 
-	public static void printMessage(final Interpreter interpreter,
-			final Object message) {
-		final PrintWriter out = new PrintWriter(
+	public static void printMessage(Interpreter interpreter,
+			Object message) {
+		PrintWriter out = new PrintWriter(
 				(Writer) ((TermRef) interpreter
 						.getProperty(ToolkitLibrary.PROP_SYS_CUR_OUTPUT))
 						.getValue());
@@ -161,48 +161,48 @@ public final class ActiveMQLibrary {
 		out.println(message);
 	}
 
-	public static Object receiveMessage(final Object consumer)
+	public static Object receiveMessage(Object consumer)
 			throws InterpreterMessage {
 
 		try {
 			return ((MessageConsumer) consumer).receive();
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't receive message"));
 		}
 
 	}
 
-	public static void sendMessage(final Object producer, final Object message)
+	public static void sendMessage(Object producer, Object message)
 			throws InterpreterMessage {
 
 		try {
 			((MessageProducer) producer).send((Message) message);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't send message"));
 		}
 
 	}
 
-	public static void setClientID(final Object connection,
-			final String clientID) throws InterpreterMessage {
+	public static void setClientID(Object connection,
+			String clientID) throws InterpreterMessage {
 
 		try {
 			((Connection) connection).setClientID(clientID);
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't set client ID"));
 		}
 
 	}
 
-	public static void startConnection(final Object connection)
+	public static void startConnection(Object connection)
 			throws InterpreterMessage {
 
 		try {
 			((Connection) connection).start();
-		} catch (final JMSException e) {
+		} catch (JMSException e) {
 			throw new InterpreterMessage(
 					InterpreterMessage.systemError("Can't start connection"));
 		}
